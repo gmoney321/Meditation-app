@@ -1,6 +1,6 @@
 {
-  "name": "Meditation App",
-  "short_name": "Timer",
+  "name": "Vipassana Meditation App",
+  "short_name": "Meditation Timer",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
