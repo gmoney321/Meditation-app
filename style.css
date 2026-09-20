@@ -1,0 +1,12 @@
+.hidden {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+* {
+    font-family: -apple-system, BlinkMaxSystemFont, "segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    text-align: center;
+}
