@@ -1,10 +1,14 @@
 let wakeLock = null;
 let outroNotPlayed = true;
-const targetTime = Date.now() + 1800000;
+let timerId = null;
+let targetTime = Date.now() + 1800000;
 const timerDisplay = document.querySelector(".timer");
+const historyDisplay = document.querySelector(".history")
 const startBtn = document.querySelector(".start-btn");
 const outroChanting = new Audio('src_assets_audio_closing-chanting.mp3');
 const introChanting = new Audio('src_assets_audio_intro-chanting.mp3');
+const stopBtn = document.querySelector(".stop-btn")
+const historyBtn = document.querySelector(".history-btn")
 async function requestWakeLock() {
 	try {
 		wakeLock = await navigator.wakeLock.request('screen');
@@ -22,7 +26,7 @@ function checkTime() {
 	console.log(seconds);
 	console.log(remainingMilliseconds)
 	if (remainingMilliseconds >= 0) {
-		setTimeout(checkTime, 1000);
+		timerId = setTimeout(checkTime, 1000);
 		timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 	}
 	if (remainingMilliseconds <= 174000 && outroNotPlayed) {
@@ -32,7 +36,23 @@ function checkTime() {
 	}
 }
 
+function logTimeLeft() {
+	let timeLeft = targetTime -Date.now();
+	let timeElapsed = 1800000 - timeLeft
+	const session = {
+		date: new Date().toLocaleString(),
+		duration: timeElapsed
+	}
+
+	let history = JSON.parse(localStorage.getItem("meditationHistory")) || [];
+	
+	history.push(session);
+
+	localStorage.setItem("meditationHistory", JSON.stringify(history));
+}
+
 startBtn.addEventListener("click", function() {
+	targetTime = Date.now() + 1800000;
 	checkTime();
 
 	outroChanting.play().then(() => {
@@ -45,4 +65,25 @@ startBtn.addEventListener("click", function() {
 	introChanting.play();
 	console.log("Playing Closing Audio");
 	requestWakeLock();
+
+	stopBtn.style.display = "inline-block";
+	startBtn.style.display = "none";
+});
+
+stopBtn.addEventListener("click", function() {
+	startBtn.style.display = "inline-block";
+	stopBtn.style.display = "none";
+	clearTimeout(timerId);
+	timerDisplay.textContent = "30:00"
+	logTimeLeft()
+});
+
+historyBtn.addEventListener("click", function() {
+	let rawData = localStorage.getItem("meditationHistory");
+	console.log(rawData);
+	console.log("history clicked")
+	let parsedData = JSON.parse(rawData) || [];
+	historyDisplay.style.display = "inline-block";
+	historyDisplay.textContent = JSON.stringify(parsedData, null, 2);
+	
 });
