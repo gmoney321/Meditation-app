@@ -15,10 +15,12 @@ const historyDisplay = document.querySelector(".history")
 const startBtn = document.querySelector(".start-btn");
 const stopBtn = document.querySelector(".stop-btn");
 const historyBtn = document.querySelector(".history-btn");
+const chimeToggle = document.querySelector("#chime-toggle");
 
 // Audio Assets
 const outroChanting = new Audio('src_assets_audio_closing-chanting.mp3');
 const introChanting = new Audio('src_assets_audio_intro-chanting.mp3');
+const chimeAudio = new Audio("chime.mp3");
 
 // Core Functions
 async function requestWakeLock() {
@@ -43,11 +45,15 @@ function checkTime() {
 		timerDisplay.textContent = formatTime(remainingMilliseconds)
 	
 		if (remainingMilliseconds <= OUTRO_TRIGGER_MS && outroNotPlayed) {
+			if (chimeToggle.checked) {
+				chimeAudio.play().catch(err => console.log("Chime play error:", err));
+				console.log("Playing Chime Audio")
+			} else{
 			outroChanting.play().catch(err => console.log("Audio play error:", err));
 			console.log("Playing Closing Audio");
-			outroNotPlayed = false;
 		}
-
+		outroNotPlayed = false;
+	}
 		timerId = setTimeout(checkTime, 1000);
 	} else {
 		handleSessionEnd();
@@ -77,6 +83,8 @@ function resetAppUI() {
 	introChanting.currentTime = 0;
 	outroChanting.pause();
 	outroChanting.currentTime = 0;
+	chimeAudio.pause();
+	chimeAudio.currentTime = 0;
 
 	outroNotPlayed = true;
 }
@@ -100,9 +108,13 @@ startBtn.addEventListener("click", function() {
 		console.log("Audio unlock failed:", error);
 	});
 
+	if (chimeToggle.checked) {
+		chimeAudio.play().catch(err => console.log("Chime play error:", err));
+        console.log("Playing Chime Audio");
+	} else {
 	introChanting.play();
 	console.log("Playing Closing Audio");
-	
+	}
 	requestWakeLock();
 	checkTime();
 
