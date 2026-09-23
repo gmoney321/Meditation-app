@@ -108,6 +108,13 @@ startBtn.addEventListener("click", function() {
 		console.log("Audio unlock failed:", error);
 	});
 
+	chimeAudio.play().then(() => {
+		chimeAudio.pause();
+		chimeAudio.currentTime = 0;
+	}).catch(error => {
+		console.log("Audio unlock failed:", error);
+	});
+
 	if (chimeToggle.checked) {
 		chimeAudio.play().catch(err => console.log("Chime play error:", err));
         console.log("Playing Chime Audio");
