@@ -9,7 +9,7 @@ let outroNotPlayed = true;
 let timerId = null;
 let targetTime = Date.now() + SESSION_DURATION_MS;
 
-// Dom Element Variables
+// Dom Elements
 const timerDisplay = document.querySelector(".timer");
 const historyDisplay = document.querySelector(".history")
 const startBtn = document.querySelector(".start-btn");
