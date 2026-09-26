@@ -1,35 +1,53 @@
 <!DOCTYPE html>
+<!-- Sets the language to English for screen readers -->
 <html lang="en">
+	<!-- Meta data in the head -->
 <head>
+	<!-- Specifies character set UTF-8 -->
 	<meta charset="UTF-8">
+	<!-- Sets the initial width based on device, zoom at 100%-->
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<!-- Title for the webpage -->
 	<title>Vipassana Meditation App</title>
+	<!-- Links to the stylesheet -->
 	<link href="style.css" rel="stylesheet">
+	<!-- Links to the manifest for android -->
 	<link rel="manifest" href="manifest.json">
-	<link rel="apple-touch-icon" href="icon.jpg">
-	<meta name="theme-color" content="#4CAF50">
+	<!-- Sets apple PWA Icon -->
+	<link rel="apple-touch-icon" href="assets\images\icon.jpg">
 </head>
+<!-- Body content of the HTML -->
 <body>
+	<!-- Sets the App area with a class -->
 	<div class="app-container"> 
+		<!-- Banner for download instructions -->
 		<header id="ios-install-banner">
 				<p>To install this app for easy meditation access, tap the 3 dots at the bottom, click "Share", click "View More", click "Add to Home Screen"</p>
 		</header>
+		<!-- Main content of the app -->
 		<main>
+			<!-- Header -->
 			<h1>Vipassana Meditation App</h1>
+			<!-- Display for the countdown timer, also used for statistics -->
 			<div class="timer">
 				30:00
 			</div>
+			<!-- Timer settings -->
 			<label>
 				<input type="checkbox" id="chime-toggle"> No Chanting
 			</label>
 		</main>
+		<!-- Buttons that stop and start the timer, 
+		 and buttons to navigate to statistics and history pages -->
 		<footer class="controls">
+				<a href="stats.html" class="nav-btn">Statistics</a>
 				<button class="start-btn">Start</button>
 				<button class="stop-btn">Stop</button>
 				<button class="history-btn">History</button>
 				<pre class="history"></pre>
 		</footer>
 	</div>
+	<!-- Link to javascript sheet -->
 		<script src="script.js"></script> 
 </body>
 </html>

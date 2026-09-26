@@ -1,88 +1,138 @@
 * {
+    /* Padding and borders are included in specified width and height */
     box-sizing: border-box;
-    margin: 2px;
+    /* Initializes margin to 0 */
+    margin: 0;
+    /* Initializes padding to 0 */
     padding: 0;
 }
 
 html, body {
+    /* Sets device width to take up whole screen*/
     width: 100%;
+    /* Sets full height minus elements that reduce readable area */
     height: 100dvh;
+    /* Sets font family waterfall */
     font-family: -apple-system, BlinkMaxSystemFont, "segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* All text is centered */
     text-align: center;
+    /* Makes screen unscrollable */
     overflow: hidden;
+    /* Sets text to white */
     color: white;
+    /* Sets background to gray */
     background-color: #2C302E;
+    /* Increases text 1.2 default */
     font-size: 1.2rem;
 }
 
 .app-container {
+    /* Sets a 2 dimensional grid */
     display: grid;
+    /* Sets height to full screen */
     height: 100%;
-    width: 100%;
+    /* Sets device width with 5% breathing room */
+    width: 95%;
+    /* Centers the element */
+    margin: auto;
+    /* Sets the percentage for 3 boxes of the grid */
     grid-template-rows: 20% 60% 20%;
+    /* Sets 100% fraction for each column resulting in a single column */
     grid-template-columns: 1fr;
 }
 
 header {
+    /* Sets header to first row */
     grid-row: 1;
+    /* Sets a 1 dimensional flexbox */
     display: flex;
+    /* Items are centered horizontally */
     justify-content: center;
+    /* Items are centered vertically */
     align-items: center;
+    /* Font size 0.8 default */
     font-size: 0.8rem;
 }
 
 main {
+    /* Sets main to second row */
     grid-row: 2;
+    /* Sets a 1 dimensional flexbox */
     display: flex;
-    text-align: center;
+    /* Sets direction vertically */
     flex-direction: column;
+    /* Spaces each element evenly with eachother and the border */
     justify-content: space-evenly;
 }
 
 footer {
+    /* Sets footer to third row */
     grid-row: 3;
-    padding: 16px;
+    /* Sets a 1 dimensional flexbox */
     display: flex;
+    /* Sets direction horizontally */
     flex-direction: row;
+     /* Spaces each element evenly with eachother and the border */
     justify-content: space-evenly;
+    /* Allows overflow with a scroll bar only if overflowed */
     overflow-y: auto;
 }
 
 button {
+    /* Inherits font from body */
     font-family: inherit;
+    /* Inherits color from body */
     color: inherit;
-    box-sizing: border-box;
+    /* Sets a large button width  */
     width: 82px;
+    /* Sets a large button height */
     height: 82px;
-    cursor: pointer;
-    font-size: 1.4rem;
-    background-color: transparent;
+    /* Circular button */
     border-radius: 50%;
+    /* Cursor when hovered */
+    cursor: pointer;
+    /* Font size 1.4 default */
+    font-size: 1.4rem;
+    /* Background clear */
+    background-color: transparent;
 }
 
 .start-btn {
+    /* Green border around button */
     border: solid #9AE19D 2px;
-    border-radius: 50%;
-    background-color: transparent;
 }
 
 .stop-btn {
+    /* Initially hides the button */
     display: none;
-    font-family: inherit;
-    color: inherit;
-    background-color: transparent;
-    border-radius: 50%;
+    /* No border */
     border: none;
 }
 
 .history-btn {
-    font-family: inherit;
-    color: inherit;
-    background-color: transparent;
-    border-radius: 50%;
+    /* No border */
     border: none;
 }
 
+.nav-btn {
+     /* Inherits font from body */
+    font-family: inherit;
+    /* Inherits color from body */
+    color: inherit;
+    /* Cursor when hovered */
+    cursor: pointer;
+    /* Font size 1.4 default */
+    font-size: 1.4rem;
+    /* No underlining */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 82px;
+    height: 82px;
+}
+
 .history {
+    /* Initially hides the history */
     display: none;
 }
