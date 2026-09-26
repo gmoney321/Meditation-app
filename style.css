@@ -38,7 +38,7 @@ html, body {
     /* Sets the percentage for 3 boxes of the grid */
     grid-template-rows: 20% 60% 20%;
     /* Sets 100% fraction for each column resulting in a single column */
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
 }
 
 header {
