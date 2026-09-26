@@ -95,9 +95,63 @@ function handleSessionEnd() {
 	resetAppUI();
 }
 
+function collectStatistics() {
+	const sessions = JSON.parse(localStorage.getItem('meditationHistory'))
+	const totalsByDate = sessions.reduce((acc, session) => {
+	const dateKey = new Date(session.date).toISOString().split('T')[0];
+	if (dateKey in acc) {
+    	acc[dateKey] += session.duration;
+  } else acc[dateKey] = session.duration;
+  return acc
+}, {});
+
+	return totalsByDate;
+
+}
+
+const finalStats = collectStatistics();
+console.log(finalStats);
+
+function displayDOD(totalsByDate) {
+	const today = new Date();
+	const yesterday = new Date(today.getTime() - 86400000);
+	const ereyesterday = new Date(yesterday.getTime() - 86400000);
+
+	const todayClean = today.toISOString().split('T')[0]
+	const yesterdayClean = yesterday.toISOString().split('T')[0]
+	const ereyesterdayClean = ereyesterday.toISOString().split('T')[0]
+
+	const todayDuration = totalsByDate[todayClean] || 0;
+	const yesterdayDuration = totalsByDate[yesterdayClean] || 0;
+	const ereyesterdayDuration = totalsByDate[ereyesterdayClean] || 0;
+
+	
+
+	const chartData = {
+	labels: [ereyesterdayDuration, yesterdayDuration, todayDuration],
+	datasets: [{
+		label: 'DOD',
+		data: [ereyesterdayDuration, yesterdayDuration, todayDuration],
+		backgroundColor: 'white',
+		borderColor: 'black',
+		borderWidth: 1
+	}]}
+
+	return chartData;
+}
+
+const chart = document.getElementById("meditationChart");
+
+if (chart) {
+	const myChart = new Chart(chart, {
+		type: 'bar',
+		data: displayDOD(finalStats)
+	});
+}
+
 // Event Listeners
 
-startBtn.addEventListener("click", function() {
+startBtn?.addEventListener("click", function() {
 	targetTime = Date.now() + SESSION_DURATION_MS;
 	outroNotPlayed = true;
 
@@ -129,13 +183,13 @@ startBtn.addEventListener("click", function() {
 	stopBtn.style.display = "inline-block";
 });
 
-stopBtn.addEventListener("click", function() {
+stopBtn?.addEventListener("click", function() {
 	clearTimeout(timerId);
 	logSession();
 	resetAppUI();
 });
 
-historyBtn.addEventListener("click", () => {
+historyBtn?.addEventListener("click", () => {
 	const rawData = localStorage.getItem(STORAGE_KEY);
 	const parsedData = JSON.parse(rawData) || [];
 	const dateOptions = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };

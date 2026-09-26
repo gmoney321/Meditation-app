@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    margin: 0;
+    margin: 2px;
     padding: 0;
 }
 
@@ -56,6 +56,8 @@ button {
     height: 82px;
     cursor: pointer;
     font-size: 1.4rem;
+    background-color: transparent;
+    border-radius: 50%;
 }
 
 .start-btn {
