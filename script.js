@@ -58,9 +58,9 @@ const meditationHours = document.getElementById("meditation-hours")
 // =====================================
 
 // Outro chanting audio object
-const outroChanting = new Audio('src_assets_audio_closing-chanting.mp3');
+const outroChanting = new Audio('assets\audio\out-chant.mp3');
 // Intro chanting audio object
-const introChanting = new Audio('src_assets_audio_intro-chanting.mp3');
+const introChanting = new Audio('assets\audio\intro-chant.mp3');
 // Chime audio objects
 const chimeAudio = new Audio("chime.mp3");
 
