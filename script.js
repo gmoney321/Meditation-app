@@ -9,6 +9,8 @@ const OUTRO_TRIGGER_MS = 174000;
 // Local storage key
 const STORAGE_KEY = "meditationHistory";
 
+const priorMeditationHours = 600;
+
 // =====================================
 // 2. STATE VARIABLES
 // =====================================
@@ -49,6 +51,7 @@ const statisticsBtn = document.querySelector(".statistics-btn");
 const chart = document.getElementById("meditationChart");
 const durationSelect = document.querySelector('#duration-select')
 const comparatorSelect = document.querySelector("#comparator-select")
+const meditationHours = document.getElementById("meditation-hours")
 
 // =====================================
 // 4. AUDIO ASSETS
@@ -119,6 +122,18 @@ function collectStatistics(duration) {
 	return totalsByDate;
 }
 
+function calculateLifetimeHours() {
+	const sessions = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+	
+	const  appMeditationMilliseconds = sessions.reduce(
+		(total, session) => total + session.duration,
+		0
+	);
+
+	const appMeditationHours = appMeditationMilliseconds / 3600000;
+	return priorMeditationHours + appMeditationHours;
+}
+
 // =====================================
 // 6. FORMATTING & PRESENTATION
 // =====================================
@@ -170,7 +185,7 @@ function generateChartData(duration, comparator) {
 		}
 
 		const dateKey = getLocalDateKey(targetDate);
-		const labelString = targetDate.toLocaleDateString('en-US',{ month: 'short', day: 'numeric' });
+		const labelString = targetDate.toLocaleDateString('en-US',{ month: 'short', day: 'numeric', year: 'numeric' });
 
 		labels.unshift(labelString);
 		barValues.unshift((stats[dateKey] || 0) / 60000);
@@ -187,6 +202,8 @@ function generateChartData(duration, comparator) {
 		}]
 	};
 }
+
+meditationHours.textContent = `Lifetime ${calculateLifetimeHours().toFixed(0)}`
 
 // =====================================
 // 7. TIMER & SESSION CONTROLLER
@@ -276,7 +293,10 @@ function handleSessionEnd() {
 // UI function to update chart values based on selectors
 function updateChartData() {
 	if (myChart) {
-		myChart.data = generateChartData(currentDuration, currentComparator);
+		myChart.data = generateChartData(
+			currentDuration, 
+			currentComparator
+		);
 		myChart.update();
 	}
 }
