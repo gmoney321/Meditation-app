@@ -58,11 +58,11 @@ const meditationHours = document.getElementById("meditation-hours")
 // =====================================
 
 // Outro chanting audio object
-const outroChanting = new Audio('assets\audio\out-chant.mp3');
+const outroChanting = new Audio('assets/audio/out-chant.mp3');
 // Intro chanting audio object
-const introChanting = new Audio('assets\audio\intro-chant.mp3');
+const introChanting = new Audio('assets/audio/intro-chant.mp3');
 // Chime audio objects
-const chimeAudio = new Audio("chime.mp3");
+const chimeAudio = new Audio("assets/audio/chime.mp3");
 
 // =====================================
 // 5. DATA LAYER
