@@ -11,14 +11,20 @@
 	<div class="app-container"> 
             <header>
                 <h1>Statistics</h1>
-                <button class="stat-buttons">Day</button>
-                <button class="stat-buttons">Week</button>
-                <button class="stat-buttons">Month</button>
-                <button class="stat-buttons">Year</button>
-                <button class="stat-buttons">DOD</button>
-                <button class="stat-buttons">WOW</button>
-                <button class="stat-buttons">MOM</button>
-                <button class="stat-buttons">YOY</button>
+                <div class="controls-container">
+                    <select id="duration-select" class="stat-select">
+                        <option class="stat-buttons">Day</option>
+                        <option class="stat-buttons">Week</option>
+                        <option class="stat-buttons">Month</option>
+                        <option class="stat-buttons">Year</option>
+                    </select>
+                    <select id="comparator-select">
+                        <option class="stat-buttons">OD</option>
+                        <option class="stat-buttons">OW</option>
+                        <option class="stat-buttons">OM</option>
+                        <option class="stat-buttons">OY</option>
+                    </select>
+                </div>
             </header>
             <main>
                 <canvas id="meditationChart"></canvas>
