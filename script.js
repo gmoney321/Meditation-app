@@ -203,8 +203,9 @@ function generateChartData(duration, comparator) {
 	};
 }
 
-meditationHours.textContent = `Lifetime ${calculateLifetimeHours().toFixed(0)}`
-
+if (meditationHours) {
+	meditationHours.textContent = `Lifetime ${calculateLifetimeHours().toFixed(0)}`
+}
 // =====================================
 // 7. TIMER & SESSION CONTROLLER
 // =====================================
