@@ -9,7 +9,7 @@ const OUTRO_TRIGGER_MS = 174000;
 // Local storage key
 const STORAGE_KEY = "meditationHistory";
 
-const priorMeditationHours = 600;
+const priorMeditationHours = 880;
 
 // =====================================
 // 2. STATE VARIABLES
@@ -329,7 +329,7 @@ startBtn?.addEventListener("click", function() {
         console.log("Playing Chime Audio");
 	} else {
 	introChanting.play();
-	console.log("Playing Closing Audio");
+	console.log("Playing intro Audio");
 	}
 	requestWakeLock();
 	checkTime();
